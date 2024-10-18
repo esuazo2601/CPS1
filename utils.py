@@ -6,15 +6,15 @@ def CalcularErrorSistematico(ref, mediciones):
     for medicion in mediciones:
         error_cuadratico = 1/len(mediciones) * np.sum((ref - medicion)**2)
         errores.append(np.sqrt(error_cuadratico))
-        
+
     # Convertir la lista de errores a un array de NumPy
     errores = np.array(errores)
     
     return errores
 
-def CalcularErrorAleatorio(mediciones):
+def CalcularErrorAleatorio(error_sistematico):
     t = 1.96
-    error_estandar = np.std(mediciones) / np.sqrt(len(mediciones))
+    error_estandar = np.std(error_sistematico) / np.sqrt(len(error_sistematico))
     error_aleatorio = t*error_estandar
     return error_aleatorio
 

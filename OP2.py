@@ -63,5 +63,5 @@ with open('OP2_errores_sistematicos.txt', 'w') as f:
         f.write(f"{error};\n")
 
 # Calcular el error aleatorio entre la temperatura de referencia y los valores de temperatura por imagen
-error_aleatorio = CalcularErrorAleatorio(promedios_temperatura)
+error_aleatorio = CalcularErrorAleatorio(errores_sistematicos)
 print("Error aleatorio OP2",error_aleatorio)
