@@ -1,25 +1,22 @@
 import numpy as np
 
 def CalcularErrorSistematico(ref, mediciones):
-    vec_error = []
+    errores = []
+    # Calcular el error cuadrático medio para cada medición
     for medicion in mediciones:
-      vec_error.append(np.abs(ref - medicion))
-    return vec_error
-
-def CalcularErrorAleatorio(ref, mediciones):
-    error_total = 0
-    # Suma de los errores cuadrados
-    for i in range(len(mediciones)):
-        error_total += np.sum((ref - mediciones[i])**2)
-
-    # Promedio de errores cuadrados
-    error_promedio = error_total / len(mediciones)
+        error_cuadratico = 1/len(mediciones) * np.sum((ref - medicion)**2)
+        errores.append(np.sqrt(error_cuadratico))
+        
+    # Convertir la lista de errores a un array de NumPy
+    errores = np.array(errores)
     
-    # Raíz cuadrada del error promedio (Error cuadrático medio)
-    raiz_error = np.sqrt(error_promedio)
+    return errores
 
-    return raiz_error
-
+def CalcularErrorAleatorio(mediciones):
+    t = 1.96
+    error_estandar = np.std(mediciones) / np.sqrt(len(mediciones))
+    error_aleatorio = t*error_estandar
+    return error_aleatorio
 
 def TwoColorPyrometry(verde, rojo):
     c2 = 0.014387

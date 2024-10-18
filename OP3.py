@@ -56,16 +56,12 @@ for i, imagen in enumerate(img_op3):
 
 # Calcular el error sistemático entre la temperatura de referencia y los promedios de temperatura
 errores_sistematicos = CalcularErrorSistematico(temp_ref_kelvin, promedios_temperatura)
-
+print("Temperatura promedio del OP1" ,np.mean(promedios_temperatura))
 # Guardar los errores sistemáticos en un archivo de texto
 with open('op3_errores_sistematicos.txt', 'w') as f:
     for error in errores_sistematicos:
         f.write(f"{error};\n")
 
 # Calcular el error aleatorio entre la temperatura de referencia y los valores de temperatura por imagen
-errores_aleatorios = [CalcularErrorAleatorio(temp_ref_kelvin, calores) for calores in calores_por_imagen]
-
-# Guardar los errores aleatorios en un archivo de texto
-with open('op3_errores_aleatorios.txt', 'w') as f:
-    for error in errores_aleatorios:
-        f.write(f"{error};\n")
+error_aleatorio = CalcularErrorAleatorio(promedios_temperatura)
+print("Error aleatorio OP3",error_aleatorio)
